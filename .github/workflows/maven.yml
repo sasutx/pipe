@@ -22,3 +22,13 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
+
+      - name: Build and push docker image
+        uses: docker/build-push-action@v6
+        with:
+          images: ${{ vars.DOCKER_USERNAME }}/pipelocux
+          tags: latest
+          registry: docker.io
+          dockerfile: Dockerfile
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ vars.DOCKER_PASSWORD }}
